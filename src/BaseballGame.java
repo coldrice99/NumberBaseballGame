@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 public class BaseballGame {
     private int gameCount = 0;
     private Set<Integer> answerSet;
+    private BaseballGameDisplay display = new BaseballGameDisplay();
 
     // 생성자에서 정답을 생성하도록 함
     public BaseballGame() {
@@ -44,29 +45,19 @@ public class BaseballGame {
 
             //게임 진행 횟수 증가
             gameCount++;
-            System.out.println("게임 진행 횟수: " + gameCount);
+//            System.out.println("게임 진행 횟수: " + gameCount);
+            display.displayGameCount(gameCount);
 
             //스트라이크 && 볼 로직 처리
             long strikes = countStrikeAndBall(inputList,true);
             long balls = countStrikeAndBall(inputList,false);
 
-            //로직 처리
-            if (strikes == 3) {
-                System.out.println("정답입니다! 넘모넘모 축하해용~");
-                break;
-            } else if (strikes > 0 && balls > 0) {
-                System.out.println(strikes + " 스트라이크! " + balls + " 볼!");
-            } else if (strikes == 0 && balls > 0) {
-                System.out.println(balls + " 볼!");
-            } else if (strikes > 0 && balls == 0) {
-                System.out.println(strikes + " 스트라이크!");
-            } else {
-                System.out.println("아웃~");
-            }
+            //힌트출력
+            display.displayHint(strikes, balls);
+            if (strikes == 3) break; //정답이므로 반복문 탈출
 
-            //힌트 출력?
         }
-        return 0;
+        return gameCount;
     }
 
     private static Set<Integer> generateAnswerSet() {
