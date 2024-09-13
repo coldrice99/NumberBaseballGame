@@ -4,18 +4,18 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class BaseballGame {
-    private int gameCount = 0;
     private Set<Integer> answerSet;
     private BaseballGameDisplay display = new BaseballGameDisplay();
-
-    // 생성자에서 정답을 생성하도록 함
-    public BaseballGame() {
-        this.answerSet = generateAnswerSet();
-        System.out.println("정답은 " + answerSet);
-    }
+    private List<Integer> gameRecords = new ArrayList<>(); //각 게임의 시도 횟수를 저장하는 리스트
 
     public int play() {
         Scanner sc = new Scanner(System.in);
+        int attempts = 0; // 시도 횟수 기록
+
+        // 새로운 게임 시작 시 정답 생성
+        this.answerSet = generateAnswerSet();
+        System.out.println("정답은 " + answerSet); // 디버깅용 출력
+
         while (true) {
             //유저에게 입력값을 받음
             System.out.println("숫자 3개를 입력하세요.");
@@ -43,21 +43,21 @@ public class BaseballGame {
                 }
             }
 
-            //게임 진행 횟수 증가
-            gameCount++;
-//            System.out.println("게임 진행 횟수: " + gameCount);
-            display.displayGameCount(gameCount);
+            //시도 횟수 증가
+            attempts++;
 
-            //스트라이크 && 볼 로직 처리
+            //스트라이크 && 볼 처리
             long strikes = countStrikeAndBall(inputList,true);
             long balls = countStrikeAndBall(inputList,false);
 
             //힌트출력
             display.displayHint(strikes, balls);
-            if (strikes == 3) break; //정답이므로 반복문 탈출
+            //정답을 맞춘 경우
+            if (strikes == 3) {
+                return attempts; // 시도 횟수를 반환하고 게임 종료
+            }
 
         }
-        return gameCount;
     }
 
     private static Set<Integer> generateAnswerSet() {

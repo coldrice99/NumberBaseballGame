@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class BaseballGameDisplay {
     public void displayHint(long strikes, long balls) {
         if (strikes == 3) {
@@ -13,7 +15,18 @@ public class BaseballGameDisplay {
         }
     }
 
-    public void displayGameCount(int gameCount) {
-        System.out.println("게임 진행 횟수: " + gameCount);
+    public void displayAttemptCount(int attempts) {
+        System.out.println("시도 횟수 : " + attempts);
+
+    }
+
+    public void displayGameRecords(List<Integer> gameRecords) {
+        if(gameRecords.isEmpty()) {
+            System.out.println("아직 진행된 게임이 없습니다.");
+        } else {
+            for (int i = 0; i < gameRecords.size(); i++) {
+                System.out.println((i+1) + "번째 게임 : 시도 횟수 -  " + gameRecords.get(i));
+            }
+        }
     }
 }
