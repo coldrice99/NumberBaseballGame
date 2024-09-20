@@ -35,7 +35,7 @@ public class Main {
                             System.out.println("잘못된 자릿수입니다. 3, 4, 5 중에서 선택하세요.");
                             continue; // 잘못된 자릿수 입력 시 다시 반복
                         }
-                        // 자릿수 설정 후 바로 게임 시작으로 이동
+                        // 자릿수 설정 후 바로 게임 시작으로 이동 (break 없음)
                     case 1:
                         //자리수를 설정하지 않으면 디폴트로 3자리로 진행.
                         int attempts = game.play(digitLength); // 게임을 진행하고 시도 횟수를 반환받음

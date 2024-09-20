@@ -19,7 +19,7 @@ public class BaseballGame {
 
         while (true) {
             //유저에게 입력값을 받음
-            System.out.println("숫자를 입력하세요.");
+            System.out.println("숫자 " + digitLength + "개를 입력하세요.");
             List<Integer> inputList = new ArrayList<>(); //입력값 저장을 위한 로컬 변수. 순서를 위해 Set이 아닌 List
 
             boolean isValid = false; // 올바른 입력을 받을 때까지 반복
